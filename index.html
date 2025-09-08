@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UnityED - Gamified Social-Emotional Learning</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f97316 0%, #facc15 50%, #9333ea 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            width: 100%;
+            z-index: 10;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 48rem;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #f97316;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            backdrop-filter: blur(4px);
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #f97316;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+
+        .section-header p {
+            font-size: 1.125rem;
+            color: #6b7280;
+            max-width: 32rem;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+        }
+
+        .icon-primary { background: rgba(249, 115, 22, 0.1); color: #f97316; }
+        .icon-secondary { background: rgba(147, 51, 234, 0.1); color: #9333ea; }
+        .icon-tertiary { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+        .icon-quaternary { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+
+        .feature-card h3 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+
+        .feature-card p {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        /* Impact Section */
+        .impact {
+            padding: 6rem 0;
+            background: linear-gradient(90deg, #fff7ed 0%, #fefce8 100%);
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .impact-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+        }
+
+        .impact-content p {
+            font-size: 1.125rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f97316;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .impact-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .visual-placeholder {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #fed7aa 0%, #ddd6fe 100%);
+            border-radius: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        /* Team Section */
+        .team {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 64rem;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-avatar {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .team-card h3 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: #1f2937;
+        }
+
+        .team-card p {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f97316 0%, #facc15 50%, #9333ea 100%);
+            text-align: center;
+            color: white;
+            position: relative;
+            background-attachment: fixed;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #f97316 0%, #facc15 50%, #9333ea 100%);
+            z-index: -1;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            color: white !important;
+        }
+
+        .cta p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            max-width: 48rem;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            color: white !important;
+        }
+        .hero-content img{
+          
+            margin:0 auto;
+        }
+
+        .cta .btn-outline {
+            background: transparent;
+            color: white !important;
+            border: 2px solid white;
+            backdrop-filter: blur(4px);
+        }
+
+        .cta .btn-outline:hover {
+            background: white;
+            color: #f97316 !important;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 2rem 0;
+            background: #0f172a;
+            color: white;
+            text-align: center;
+        }
+
+        .footer h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer p {
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer .copyright {
+            color: #64748b;
+            font-size: 0.75rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.125rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .impact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .visual-placeholder {
+                width: 250px;
+                height: 250px;
+            }
+
+            .button-group {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="badge">
+                    ✨ Gamified Social-Emotional Learning
+                </div>
+                
+                <img src="app\Logo_de_UnityEd_avec_Embleme_Multicolore.png" width="400px" height="400px" >
+                <p>Empowering kids to build empathy, resolve conflicts, and create belonging through interactive gaming</p>
+                <div class="button-group">
+                    <a href="#" class="btn btn-primary">
+                        ▶️ Start Learning
+                    </a>
+                    <a href="#" class="btn btn-outline">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Building Social Skills Through Play</h2>
+                <p>Our interactive gaming platform helps children ages 8-12 develop emotional intelligence and conflict resolution skills in a safe, engaging environment.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon icon-primary">🎮</div>
+                    <h3>Interactive Gaming</h3>
+                    <p>Story-driven adventures that teach empathy through choice-based gameplay</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-secondary">❤️</div>
+                    <h3>Emotional Intelligence</h3>
+                    <p>Build self-awareness and emotional regulation through guided scenarios</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-tertiary">👥</div>
+                    <h3>Foster Belonging</h3>
+                    <p>Create inclusive environments where every child feels valued and connected</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-quaternary">🛡️</div>
+                    <h3>Anti-Bullying</h3>
+                    <p>Proactive approach to prevent bullying through empathy and understanding</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="impact">
+        <div class="container">
+            <div class="impact-grid">
+                <div class="impact-content">
+                    <h2>Making a Real Difference</h2>
+                    <p>Research shows that 71% of Canadian youth experience bullying, but with proper social-emotional learning, we can create safer, more inclusive environments for all children.</p>
+                    <div class="stats-grid">
+                        <div class="stat">
+                            <div class="stat-number">57%</div>
+                            <div class="stat-label">Bullying stops when peers intervene</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">$11</div>
+                            <div class="stat-label">Return for every $1 invested in SEL</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="impact-visual">
+                    <div class="visual-placeholder">🎮</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team">
+        <div class="container">
+            <div class="section-header">
+                <h2>Meet Our Team</h2>
+                <p>Passionate students dedicated to creating safer, more inclusive learning environments for children everywhere.</p>
+            </div>
+            <div class="team-grid">
+                
+                <div class="team-card">
+                    <div class="team-avatar icon-secondary">MC</div>
+                    <h3>Michelle Chala</h3>
+                    <p>Co-Enterprise Manager </p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar icon-primary">MT</div>
+                    <h3>Michael Tahirovic</h3>
+                    <p>Co-Enterprise Manager</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar icon-tertiary">AT</div>
+                    <h3>Ali Tulloch</h3>
+                    <p>Vice President</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Transform Learning?</h2>
+            <p>Join us in creating a world where every child feels safe, valued, and empowered to build meaningful connections.</p>
+            <div class="button-group">
+                <a href="#" class="btn btn-primary">Get Started Today</a>
+                <a href="#" class="btn btn-outline">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <h3>UnityED</h3>
+            <p>Empowering the next generation through gamified social-emotional learning</p>
+            <div class="copyright">© 2025 UnityED. Building belonging, one game at a time.</div>
+        </div>
+    </footer>
+</body>
+</html>
